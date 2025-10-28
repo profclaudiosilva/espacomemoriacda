@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Espaço Memória — Contato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecalho" role="banner">
+    <div class="marca">
+      <div class="marca-icone">EM</div>
+      <div class="marca-texto"><div>Espaço Memória</div><div class="submarca">Conceição do Araguaia</div></div>
+    </div>
+
+    <nav class="navegacao" role="navigation" aria-label="Principal">
+      <a href="index.html">Início</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html" class="link-ativo">Contato</a>
+    </nav>
+
+    <button class="botao-hamburguer" id="botaoHambContato" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="conteudo-pagina">
+      <h1 class="titulo-secundario animar-titulo">FALE CONOSCO</h1>
+      <p class="subtitulo">Preencha o formulário abaixo e entraremos em contato.</p>
+
+      <!-- Formulário: usar Formspree ou endpoint próprio para envio automático -->
+      <form id="formContato" class="form-contato" method="POST" action="https://formspree.io/f/SEU_ENDPOINT_FORMSPREE">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" required>
+
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" required>
+
+        <label for="telefone">Telefone</label>
+        <input id="telefone" name="telefone" type="tel">
+
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+
+        <div class="captcha-bloco">
+          <input id="naoRobo" name="naoRobo" type="checkbox" required>
+          <label for="naoRobo">Não sou robô</label>
+        </div>
+
+        <div class="acoes-form">
+          <button type="submit" class="botao-envio">Enviar</button>
+          <button type="button" id="botaoMailto" class="botao-envio secundario">Enviar via e-mail</button>
+        </div>
+
+        <small class="observacao">ATENÇÃO: para envio automático ao professorclaudiosilva@ifpa.edu.br configure um endpoint (Formspree, EmailJS ou backend). O envio direto do navegador para um e-mail não é suportado sem backend.</small>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>&copy; 2025 Espaço Memória — Conceição do Araguaia. Todos os direitos reservados.</p>
+      <p><a href="index.html">Início</a> | <a href="acervo.html">Acervo</a> | <a href="sobre.html">Sobre</a> | <a href="contato.html">Contato</a></p>
+      <p>Contato: <a href="mailto:contato@espacomemoria.local">contato@espacomemoria.local</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

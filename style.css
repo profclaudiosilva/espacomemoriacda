@@ -1,0 +1,241 @@
+/* style.css — Estilos do projeto
+   Todas as classes/IDs em português e comentários em PT-BR. */
+
+/* RESET e base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  background-image: url('imagens/background1.jpg'); /* pasta 'imagens' sem acento */
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* CABEÇALHO */
+.cabecalho {
+  position: fixed;
+  top: 12px; left: 0; right: 0;
+  margin: auto;
+  max-width: 1200px;
+  padding: 12px 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  z-index: 1200;
+  background: rgba(0,0,0,0.45);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+.marca { display:flex; gap:12px; align-items:center; }
+.marca-icone { width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg,#b98a4b,#7a4b1c); color:#080402; font-weight:900; }
+.marca-texto { font-weight:800; }
+.submarca { font-size:12px; color: rgba(255,255,255,0.8); }
+
+/* navegação */
+.navegacao { display:flex; gap:18px; align-items:center; }
+.navegacao a { color:#f4efe7; text-decoration:none; font-weight:600; padding:8px; border-radius:8px; }
+.navegacao a:hover, .link-ativo { color: #e2bf63; }
+
+/* botão mobile */
+.botao-hamburguer { display:none; background:none; border:none; color:#fff; font-size:1.6rem; cursor:pointer; }
+
+/* SEÇÃO DESTAQUE */
+.secao-destaque {
+  position: relative;
+  min-height: 100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  padding-top:70px; /* espaço para cabeçalho */
+}
+.conteudo-destaque { z-index:2; padding: 20px; }
+
+/* TÍTULOS (efeito histórico aplicado via JS)
+   .animar-titulo indica elementos que serão "split" e animados letra-a-letra */
+.titulo-principal, .titulo-secundario {
+  color: #f5d56e;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,0.6);
+  line-height:1.05;
+  letter-spacing:0.6px;
+}
+.titulo-principal { font-size:2.5rem; font-weight:800; margin-bottom:0.6rem; }
+.titulo-secundario { font-size:1.8rem; font-weight:800; margin-bottom:0.6rem; }
+
+/* cada letra (span) ganha a classe .letra e receberá a animação definida aqui */
+.letra {
+  display:inline-block;
+  opacity:0;
+  transform: translate(-80px, -30px) rotate(-120deg) scale(2.2);
+}
+@keyframes entrarLetra {
+  0% { transform: translate(-80px, -30px) rotate(-120deg) scale(2.2); opacity:0; }
+  60% { transform: translate(8px,8px) rotate(20deg) scale(0.6); opacity:1; }
+  100% { transform: translate(0,0) rotate(0deg) scale(1); opacity:1; }
+}
+
+/* subtítulo */
+.subtitulo {
+  font-size:1.05rem; max-width:860px; margin:0 auto; color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+}
+
+/* TIRA DE FILME
+   - uso de variável CSS para controlar duração de animação (fácil ajuste)
+   - inicialmente definimos a duração 33.333s (50% mais rápido que 50s)
+*/
+:root {
+  --duracao-trilho: 33.333s; /* desktop (50% mais rápido que 50s) */
+}
+
+/* Na media query para telas pequenas, dobramos a velocidade (metade da duração) */
+@media (max-width: 600px) {
+  :root { --duracao-trilho: 16.666s; } /* muito mais rápido no celular */
+}
+
+.tira-filme-wrap { position:relative; width:100vw; display:flex; justify-content:center; pointer-events:none; margin-top:28px; z-index:3; }
+.tira-filme { width:100%; max-width:none; overflow:hidden; height:160px; }
+
+/* trilho: seu conteúdo será duplicado em JS para loop contínuo */
+.trilho {
+  display:flex; gap:12px; align-items:center; width:200%; height:100%;
+  animation: moverTrilho var(--duracao-trilho) linear infinite;
+}
+
+/* cada quadro (frame) */
+.quadro {
+  flex: 0 0 auto;
+  width:220px;
+  height:100%;
+  overflow:hidden;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,0.04);
+  background:#0b0a09;
+  display:flex; align-items:center; justify-content:center;
+  transition: transform 0.35s ease, z-index 0.2s;
+}
+
+/* imagem dentro do quadro:
+   - no ACERVO usamos object-fit: contain para não cortar
+   - aqui para a tira podemos usar cover para preencher o quadro, mas o acervo usará objeto diferente
+*/
+.quadro img {
+  width:100%;
+  height:100%;
+  object-fit: cover; /* tira: cover para preencher visual */
+  display:block;
+  filter: grayscale(.7) contrast(1.05);
+  opacity:.98;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* hover normal (desktop) dá leve zoom na imagem da tira */
+@media (min-width: 601px) {
+  .quadro:hover img { transform: scale(1.12); filter: grayscale(0) contrast(1.02); }
+}
+
+/* animação do trilho (move -50% para dar o efeito de loop por duplicação) */
+@keyframes moverTrilho { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* fades laterais para entrada/saída (apenas efeito visual) */
+.tira-filme::before, .tira-filme::after {
+  content:"";
+  position:absolute; top:0; bottom:0; width:12%; z-index:5; pointer-events:none;
+}
+.tira-filme::before { left:0; background: linear-gradient(90deg, rgba(7,6,7,0.9), transparent); }
+.tira-filme::after { right:0; background: linear-gradient(270deg, rgba(7,6,7,0.9), transparent); }
+
+/* ESCALA AUTOMÁTICA DO ITEM CENTRAL (RESPONSIVO)
+   - quando em telas <=600px, o script adiciona classe .central-responsivo ao quadro central;
+   - a imagem então sobe dramaticamente em altura (scaleY) sem alterar textos.
+*/
+@media (max-width: 600px) {
+  .quadro.central-responsivo {
+    z-index: 30; /* aparece acima dos outros quadros */
+  }
+  .quadro.central-responsivo img {
+    transform-origin: center center;
+    transform: scaleY(2.0) scaleX(1.05);
+    transition: transform 0.45s ease;
+  }
+}
+
+/* ============================
+   GRID e CARDS do ACERVO
+   - Aqui usamos object-fit: contain para não cortar as imagens
+   ============================ */
+.grid-acervo {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+  padding:24px;
+}
+.card-acervo {
+  overflow:hidden;
+  border-radius:8px;
+  background:#0b0a09;
+  border:1px solid rgba(255,255,255,0.04);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display:flex; align-items:center; justify-content:center;
+}
+.card-acervo img {
+  width:100%;
+  height:100%;
+  object-fit: contain; /* crucial: respeita a proporção, não corta */
+  transition: transform 0.45s ease;
+  background: #000; /* letterbox discreto quando necessário */
+}
+
+/* Hover do acervo: zoom 200% (imagem + moldura) */
+.card-acervo:hover {
+  transform: scale(2.0);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  z-index: 40;
+}
+.card-acervo:hover img {
+  transform: scale(1.15); /* leve ajuste interno */
+}
+
+/* ============================
+   FORMULÁRIO DE CONTATO
+   ============================ */
+.conteudo-pagina {
+  max-width: 1100px;
+  margin: 90px auto;
+  padding: 20px;
+}
+.subtitulo { margin-bottom: 10px; }
+.form-contato { margin-top:16px; display:flex; flex-direction:column; gap:10px; width:100%; }
+.form-contato label { font-size:0.95rem; color:#fff; }
+.form-contato input, .form-contato textarea {
+  padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.4); color:#fff;
+}
+.captcha-bloco { display:flex; align-items:center; gap:8px; margin-top:6px; }
+.acoes-form { display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; }
+.botao-envio { padding:12px 18px; background:#e2bf63; color:#070607; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
+.botao-envio.secundario { background:transparent; color:#e2bf63; border:1px solid rgba(226,191,99,0.18); }
+
+/* RODAPÉ */
+.rodape {
+  margin-top: 40px;
+  background: linear-gradient(180deg,#070607,#0b0a09);
+  color: rgba(255,255,255,0.85);
+  text-align:center;
+  padding:28px 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* RESPONSIVIDADE GERAL */
+@media (max-width: 600px) {
+  .botao-hamburguer { display:block; }
+  .navegacao { display:none; position:absolute; top:64px; right:10px; background: rgba(0,0,0,0.85); padding:12px; border-radius:8px; flex-direction:column; }
+  .navegacao.ativo { display:flex; }
+  .titulo-principal { font-size:1.6rem; text-align:center; }
+  .subtitulo { font-size:0.95rem; }
+  .tira-filme { height:120px; }
+  .quadro { width:160px; }
+  .conteudo-destaque { padding:8px; }
+  .conteudo-pagina { margin:70px 12px; padding:10px; }
+}
