@@ -254,12 +254,12 @@ p {
       border-radius: 0.8rem;
       display: block;
       margin: 0 auto;
-      cursor: pointer;
+      /*cursor: pointer;*/
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .sobre-figure img:hover {
-      transform: scale(1.01);
+      transform: scale(1.0);
       box-shadow: 0 12px 25px rgba(0,0,0,0.5);
     }
 
@@ -460,7 +460,7 @@ p {
   background: #000; /* letterbox discreto quando necessário */
 }
 
-/* Hover do acervo: zoom 200% (imagem + moldura) */
+/* Hover do acervo: zoom pequeno (imagem + moldura) */
 .card-acervo:hover {
   transform: scale(1.1);
   box-shadow: 0 30px 60px rgba(0,0,0,0.6);
