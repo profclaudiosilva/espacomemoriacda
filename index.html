@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Espaço Memória — Início</title>
+
+  <!-- referenciar CSS -->
+   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CABEÇALHO FIXO -->
+  <header class="cabecalho" role="banner">
+    <div class="marca">
+      <div class="marca-icone">
+        <img src="imagens/foto3.jpg" alt="imagens">
+      </div>
+      <div class="marca-texto">
+        <div>Espaço Memória</div>
+        <div class="submarca">Conceição do Araguaia</div>
+      </div>
+    </div>
+
+    <!-- navegação principal -->
+    <nav class="navegacao" role="navigation" aria-label="Principal">
+      
+      <a href="acervo.html">Acervo</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+
+    <!-- botão hamburguer para mobile -->
+    <button class="botao-hamburguer" id="botaoHamb" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <!-- seção de destaque (banner principal) -->
+    <section class="secao-destaque" id="inicio">
+      <!-- conteúdo textual — o título usa a classe 'animar-titulo' para aplicar animação letra-a-letra -->
+      <div class="conteudo-destaque">
+        <h1 id="tituloPrincipal" class="titulo-principal animar-titulo">ESPAÇO MEMÓRIA DE CONCEIÇÃO DO ARAGUAIA</h1>
+        <p class="subtitulo">Fotografias, objetos e memórias que contam a história de Conceição do Araguaia — uma viagem no tempo em imagens.</p>
+      </div>
+
+      <!-- faixa de filme: ocupa toda a largura -->
+      <div class="tira-filme-wrap">
+        <div class="tira-filme" id="tiraFilme" aria-hidden="true">
+          <div class="trilho" id="trilho" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+
+  <!-- RODAPÉ PADRÃO -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>&copy; 2025 Espaço Memória — Conceição do Araguaia. Todos os direitos reservados.</p>
+      <p>
+        <a href="index.html">Início</a> |
+        <a href="acervo.html">Acervo</a> |
+        <a href="sobre.html">Sobre</a> |
+        <a href="contato.html">Contato</a>
+      </p>
+      <p>Contato: raimundo.nonato@ifpa.edu.br </p>
+    </div>
+  </footer>
+
+  <!-- script principal -->
+  <script src="script.js" defer></script>
+</body>
+</html>
